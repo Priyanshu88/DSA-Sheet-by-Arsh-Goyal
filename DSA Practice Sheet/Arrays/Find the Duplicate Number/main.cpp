@@ -1,16 +1,31 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        int dup=0;
-        sort(nums.begin(),nums.end());
-        for(int i=0;i<nums.size()-1;i++)
+
+    // Based on floyd's cycle detection Algorithm
+    int slow = nums[0];
+    int fast = nums[0];
+    
+    // for detecting the loop
+
+    do   
         {
-            if(nums[i] == nums[i+1])
-            {
-                dup = nums[i];
-                break;
-            }
+            slow = nums[slow];
+            fast = nums[nums[fast]];
         }
-        return dup;
+        while(slow != fast);
+    
+    // move fast to initial position 
+
+    fast = nums[0];
+
+    // Node at which both slow and fast will meet will be the duplicate number
+
+    while(slow != fast)
+        {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+    return slow;
     }
 };
