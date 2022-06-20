@@ -1,56 +1,68 @@
 class Solution {
-private:
-    int ans = 0;
+public:
+    int ans;
+
+    // merge function for merge sort
+
     void merge(vector<int>&nums,int l,int m,int r)
     {
-        int i=l,j=m+1;
-        vector<int> temp;
-        while(i<=m && j<= r)
+        int n1 = m-l+1; int n2 = r-m;
+        int left[n1]; int right[n2];
+        for(int i=0;i<n1;i++)
         {
-            if(nums[i] < nums[j])
-            temp.push_back(nums[i++]);
+            left[i] = nums[l+i];
+        } 
+        for(int i=0;i<n2;i++)
+        {
+            right[i] = nums[m+1+i];
+        }
+        int i=0,j=0;
+
+        // checking the provided condition for reverse pair
+
+        while(i<n1 && j<n2)
+        {
+            if(left[i]/(2.0) > right[j])
+            {
+                ans += n1-i;
+                j++;
+            }
             else
-            temp.push_back(nums[j++]);
+            i++;
         }
-        while (i<=m)
+        i=0,j=0; int k = l;
+        while(i<n1 && j<n2)
         {
-            temp.push_back(arr[i++]);
+            if(left[i] <= right[j])
+            nums[k++] = left[i++];
+            else
+            nums[k++] = right[j++];
         }
-        while (j<=r)
-        {
-            temp.push_back(arr[j++]);
-        }
-        i=0;
-        for(int x = l;x<=r;x++)
-        nums[x] = temp[i++];
+        while(i<n1)
+        nums[k++] = left[i++];
+        while(j<n2)
+        nums[k++] = right[j++];
         
     }
 
+    // perform merge sort
+
     void MergeSort(vector<int>&nums,int l,int r)
     {
-        if(l<r)
+        if(r>l)
         {
-            // dividing array in two parts recursively
-            int i,j;
-            int mid = (l+r)/2;
-            MergeSort(arr,l,mid);
-            MergeSort(arr,mid+1,r);
-            j=mid+1;
-            long long temp;
-            for(int i=1;i<=mid;i++)
-            {
-                while(j<=r && (long)nums[i] >(long)2*nums[j])
-                j++;
-                ans+=j-mid-1;
-            }
+            int mid = l+(r-l)/2;
+            MergeSort(nums,l,mid);
+            MergeSort(nums,mid+1,r);
             merge(nums,l,mid,r);
         }
     }
 
-public:
+    // implement the functions
 
     int reversePairs(vector<int>& nums) 
     {
+        ans = 0;
         MergeSort(nums,0,nums.size()-1);
         return ans;
     }
