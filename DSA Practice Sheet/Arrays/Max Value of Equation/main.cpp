@@ -23,7 +23,7 @@ public:
     int findMaxValueOfEquation(vector<vector<int>>& points, int k) 
     {
 
-        // declaring deque to find the max of yi-xi for every j(i<j)
+        // decreasing deque to find the max of yi-xi for every j(i<j)
 
 
         deque<vector<int>> dq;
@@ -64,5 +64,29 @@ public:
             dq.push_back({points[j][0],v});
         }
         return  maxVal;
+    }
+};
+
+
+// We can use the sliding window technique and monotonically decreasing deque d. The maximum yi - xi therefore will be in the front. For the deque, we can just store the index j there to make it faster.
+
+// First, remove items that got out of the xj - xi window from the front of the queue. Then, we compute our value. Finally, we add i to the deque, making sure we keep monotonicity of y - x. In other words, we just remove all elements with smaller y - x from the back of the deque.
+
+class Solution {
+public:
+    int findMaxValueOfEquation(vector<vector<int>>& points, int k)     {
+        int res= INT_MIN;
+        deque<int> dq;
+        for (int j=0;j<points.size();j++)
+        {
+            while(!dq.empty() && points[j][0]-points[dq.front()][0] > k)
+                dq.pop_front();
+            if(!dq.empty())
+                res = max(res,points[dq.front()][1]-points[dq.front()][0]+points[j][1]+points[j][0]);
+            while(!dq.empty() && points[dq.back()][1]-points[dq.back()][0] < points[j][1] - points[j][0])
+                dq.pop_back();
+            dq.push_back(j);
+        }
+        return res;
     }
 };
