@@ -40,7 +40,49 @@ class Solution
                 // if count of current character in string s is equal to or 
                 // less than in string p, we increment the counter
 
+                if(phash[s[i]]-'a' != 0 && shash[s[i]-'a'] <= phash[s[i]-'a'])
+                {
+                    counter++;
+                }
+
+                // if all the character are matched 
+                
+                if(counter == p.length())
+                {
+
+                    // we try to minimize the window 
+
+                    while(shash[s[begin]-'a'] > phash[s[begin]-'a'] || phash[s[begin]-'a'] == 0)
+                    {
+                        if(shash[s[begin]-'a']>phash[s[begin]-'a'])
+                        shash[s[begin]-'a']--;
+                        begin++;
+                    }
+
+                    // update window size
+
+                    length = i-begin+1;
+                    if(length < minlength)
+                    {
+
+                        // if new minimum sub-string is found, we store value
+                        // of its stating index for new found window
+
+                        startindex = begin;
+                        minlength = length;
+                    }
+
+                }
+
             }
+            
+            // returning the smallest window or -1 if no such window is present
+
+            if(startindex == -1)
+            return "-1";
+            else
+            return s.substr(startindex,minlength);
+            
         }
     }
 };
