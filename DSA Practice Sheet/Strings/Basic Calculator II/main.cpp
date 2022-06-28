@@ -9,13 +9,10 @@ public:
     //  ** If operator = '-', (i.e; the previous operator was -), we toggle curr's operator and push it into the stack ('Cause this value needs to be subtracted from ans).
     //  ** If operator = '*', (i.e; we encountered a x sign previously), then the  value should be multiplied with it and then added to ans, so we pop the top of the stack, multiply it with the current value and push the result into the stack.
     //  ** If operator = '/', i.e; we encountered a / previously, then the curr value should divide the previous value ans, so we pop the top of the stack, divide it with curr and push the result into the stack.
-    //  4. At the end, we encounter another '+' sign, this is to push the last curr value into the stack.
-    //  5. Finally we have obtained a stack of values all of which only need to be added to obtain the ans.
-    //  6. So pop the values from stack one by one, add them to ans, and return the ans
-    // If the current character is a digit 0-9 ( i.e. operand ), add it to the currentNum.
-    // Otherwise, the current character must be an operator (+,-,*, /). Evaluate the expression based on the type of operation.
-    // Addition (+) or Subtraction (-): We must evaluate the expression later based on the next operation. So, we must store the currentNumber to be used later. Let's push the currentNumber in the Stack.
-
+    //  At the end, we encounter another '+' sign, this is to push the last curr value into the stack.
+    //  Finally we have obtained a stack of values all of which only need to be added to obtain the ans.
+    //  So pop the values from stack one by one, add them to ans, and return the ans
+    
     int calculate(string s) 
     {
         int n = s.length();
