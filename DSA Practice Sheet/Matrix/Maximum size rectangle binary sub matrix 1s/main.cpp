@@ -111,4 +111,53 @@ int maxRectangle(int M[][m])
 
 
 
-a
+
+
+class Solution
+{
+    public:
+
+    int maxHist(int A[],int m)
+    {
+        stack<int> answer;
+        int top_val;
+        int max_area;
+        int area = 0;
+        int i=0;
+        while(i < m)
+        {
+            if(answer.empty() || A[answer.top() <= A[i]])
+            answer.push(i++);
+            else
+            {
+                top_val = A[answer.top()];
+                answer.pop();
+                if(!answer.empty())
+                {
+                    area = top_val * (i-answer.top()-1);
+                }
+                max_area = max(area,max_area);
+            }
+        }
+
+
+        while(!answer.empty())
+        {
+            top_val = A[answer.top()];
+            answr
+        }
+
+    }
+
+
+
+
+    int maxArea(int M[MAX][MAX], int n, int m) 
+    {
+
+        // Your code here
+    
+        return maxRect(M,n,m);
+    }
+
+};
