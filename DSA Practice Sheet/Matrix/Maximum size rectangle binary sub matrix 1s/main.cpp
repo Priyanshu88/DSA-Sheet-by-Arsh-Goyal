@@ -111,6 +111,11 @@ int maxRectangle(int M[][m])
 
 
 
+// We get the largest rectangle full of 1's, update the next row with the previous row
+// and find the largest area under the histogram, i.e. consider each 1's as filled squares and 0's 
+// with an empty square and consider each row as the base.
+
+
 
 
 class Solution
@@ -132,6 +137,7 @@ class Solution
             {
                 top_val = A[answer.top()];
                 answer.pop();
+                area = top_val*i;
                 if(!answer.empty())
                 {
                     area = top_val * (i-answer.top()-1);
@@ -144,9 +150,28 @@ class Solution
         while(!answer.empty())
         {
             top_val = A[answer.top()];
-            answr
+            answer.pop();
+            area = top_val*i;
+            if(!answer.empty())  area = top_val * (i-answer.top() - 1);
+            max_area = max(area, max_area);
         }
+        return max_area;
 
+    }
+
+
+    int maxRect(int M[MAX][MAX],int n,int m)
+    {
+        int ans = maxHist(M[0],m);
+        for(int i=1;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(M[i][j])  M[i][j] += M[i-1][j];
+            }
+            ans = max(ans,maxHist(M[i],m))
+        }
+        return ans;
     }
 
 
@@ -155,9 +180,9 @@ class Solution
     int maxArea(int M[MAX][MAX], int n, int m) 
     {
 
-        // Your code here
-    
         return maxRect(M,n,m);
     }
+
+
 
 };
