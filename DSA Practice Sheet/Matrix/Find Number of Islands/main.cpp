@@ -162,8 +162,8 @@
             {
                 if(M[i][j] == 1)
                 {
-                    M[i][j] == 0;
-                    count ++;
+                    M[i][j] = 0;
+                    count++;
                     DFS(M,i+1,j,ROW,COL);   // right side traversal
                     DFS(M,i-1,j,ROW,COL);   // left side traversal
                     DFS(M,i,j+1,ROW,COL);   // upward side traversal
@@ -204,9 +204,9 @@ class Solution
     public:
 
     // these lists are used to get row and column numbers of 8
-    // neighbors of a given cell.
+    // neighbors of a given cell
 
-    vector<int> dx = {-1,0,1,0,1,-1,-1,-1};
+    vector<int> dx = {-1,0,1,0,1,-1,-1,1};
     vector<int> dy = {0,-1,0,1,1,1,-1,-1};
 
 
@@ -231,6 +231,10 @@ class Solution
         queue<pair<int,int>> q;
         int ans = 0;
 
+        // if current element is 1 and not visited
+        // mark it as visited and push it into queue
+        // and increase the count of number of islands
+
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
@@ -241,15 +245,24 @@ class Solution
                     vis[i][j] = true;
 
                     q.push({i,j});
+
+                    // while queue is not empty
+                    // take front element
+                    // and put all the adjacent into queue and mark them visited
+
                     while (!q.empty())
                     {
-                        int x  = q.front().first;
+                        int x = q.front().first;
                         int y = q.front().second;
                         q.pop();
 
                         for(int k=0;k<8;k++)
                         {
-                            if(isValid(x+dx[k],y+dy[k],n,m) and !vis[x+dx[k]][y+dy[k]] and grid[x+dx[k]][y+dy[k] == '1'])
+
+                            // if current index is valid and not visites and value at that index is 1
+                            // then push it into queue and mark as visited
+
+                            if (isValid(x + dx[k], y + dy[k], n, m) and !vis[x + dx[k]][y + dy[k]] and grid[x + dx[k]][y + dy[k]] == '1')
                             {
                                 q.push({x+dx[k],y+dy[k]});
                                 vis[x+dx[k]][y+dy[k]] = true;
