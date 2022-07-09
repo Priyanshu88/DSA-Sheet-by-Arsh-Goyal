@@ -29,7 +29,7 @@ public:
     {
         int m = INT_MAX;
         for(int n:nums) m = min(m,n);
-        int ans = 0;
+        int ans = 0g;
         for(int n:nums) ans+=n-m;
         return ans;
     }
