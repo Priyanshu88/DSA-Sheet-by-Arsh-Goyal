@@ -19,18 +19,27 @@ public:
     }
 };
 
+// O(nlogn)
 
 
 class Solution {
 public:
-
+    
+    // Taking the minimum number from the array and
+    // then subtracting that minimum number from all the elements in the array, 
+    // the final answer is the sumation of the differences between the minimum number 
+    // and the integer values in the given array.
 
     int minMoves(vector<int>& nums) 
     {
         int m = INT_MAX;
         for(int n:nums) m = min(m,n);
-        int ans = 0g;
+        int ans = 0;
         for(int n:nums) ans+=n-m;
         return ans;
     }
 };
+
+
+// O(n)
+
