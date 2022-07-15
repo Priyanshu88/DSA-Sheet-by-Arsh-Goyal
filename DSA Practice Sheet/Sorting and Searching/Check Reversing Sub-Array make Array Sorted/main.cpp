@@ -75,6 +75,11 @@ bool checkReverse(int arr[], int n)
 // S.C.:O (n)
 
 
+// returning true when the array is already sorted or when the array consists of 
+// three parts the first part is increasing subarray, then decreasing subarray, and then again 
+// increasing subarray. so we need to check that array contains increasing elements then some decreasing elements,
+// and then increasing  and we wil handle the validity of three parts then answer will be True. 
+// in all other cases, the answer will be False.
 
 bool checkReverse(int arr[], int n)
 {
@@ -83,9 +88,13 @@ bool checkReverse(int arr[], int n)
 
     int i;
 
+    // finding the first increasing part
+
     for(i=1; i<n && arr[i-1] < arr[i]; i++)
     if(i == n)
     return true;
+
+    // finding the reversed part
 
     int j=i;
     while(j < n && arr[j] < arr[j-1])
@@ -98,7 +107,11 @@ bool checkReverse(int arr[], int n)
     if(j == n)
     return true;
 
+    // finding last increasing part
+
     int k = j;
+
+    // check for validity
 
     if(arr[k] < arr[i-1])
     return false;
@@ -111,3 +124,6 @@ bool checkReverse(int arr[], int n)
     }
     return true;
 }
+
+// T.C.:O(n)
+// S.C. :O(1)
