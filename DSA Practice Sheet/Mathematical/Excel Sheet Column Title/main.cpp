@@ -7,16 +7,16 @@ public:
     // we append it into the beginning and again we map the ranged values with same approach and get as (n-1)/26 at the place of n and
     // we keep doing this until n becomes 0 where n is the columnNumber.
 
-expressions: char ch = (columnNumber-1)%26;
-columnNumber = (columnNumber-1)/26;
+// expressions: char ch = (columnNumber-1)%26;
+// columnNumber = (columnNumber-1)/26;
 
     string convertToTitle(int columnNumber) 
     {
         string result = "";
         while(columnNumber)
         {
-            char c = (columnNumber - 1)%26;
-            result += c;
+            char c = 'A' + (columnNumber - 1)%26;
+            result = c + result;
             columnNumber = (columnNumber - 1)/26;
         }
         return result;
