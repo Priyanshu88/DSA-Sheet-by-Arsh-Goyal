@@ -46,14 +46,13 @@ public:
         // then initializing carry as 0 and newHead as null
 
         int carry = 0;
-        ListNode *newHead = NULL;
+        int temp = 0;
+        ListNode *newHead = new ListNode(0);
 
         // traversing until both stacks od not become empty and carry not 0
 
         while (!stk1.empty() || !stk2.empty() || carry != 0)
         {
-
-            int temp = 0;
 
             // if stack is empty assign 0 otherwise pop the element for both the cases
 
@@ -75,7 +74,7 @@ public:
 
             newNode->next = newHead->next;
             newHead->next = newNode;
-            carry = temp / 10;
+            carry = (temp /= 10);
         }
 
         return newHead;
