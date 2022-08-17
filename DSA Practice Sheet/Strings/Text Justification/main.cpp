@@ -1,3 +1,11 @@
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
 
@@ -24,7 +32,7 @@ public:
             {
                 string justified_str = justify(words,line_start,i-1,maxWidth);
                 res.push_back(justified_str);
-                line_start = i'
+                line_start = i;
                 line_sz = 0;
                 i--;
                 num_words = 0;
@@ -46,7 +54,7 @@ public:
         res.push_back(last_str);
         return res;
     }
-
+};
     string justify(vector<string> &words,int start, int end,int maxWidth)
     {
         string res;
@@ -99,4 +107,3 @@ public:
         return res;
 
     }
-};
