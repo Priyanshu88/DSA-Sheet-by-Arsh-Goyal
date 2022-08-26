@@ -1,3 +1,9 @@
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
 
@@ -31,7 +37,7 @@ public:
     {
         for(int i=0;i<matrix.size();i++)
         {
-            for(int j=0;j<matrix-i-1;j++)
+            for(int j=0;j<matrix.size()-i-1;j++)
             {
                 int curr = matrix[i][j];
                 matrix[i][j] = matrix[matrix.size()-j-1][matrix.size()-i-1];
@@ -55,8 +61,6 @@ public:
             }
         }
     }
-
-
 };
 
 

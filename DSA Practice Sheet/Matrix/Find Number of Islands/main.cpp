@@ -198,6 +198,18 @@
 // S.C.:O(1)
 
 
+// take a queue and a 2d array named status
+// traverse the given matrix
+// if current element is 1 and not visited
+// mark it visited and push it into queue
+// increase the count of number of islands
+
+// while queue is not empty
+// take front element
+// put all the adjacent into queue and mark them visited
+
+
+
 
 class Solution
 {
