@@ -26,7 +26,8 @@
 // Rearrange the given vector by swapping nodes from both ends. 
 // Copy the modified vector back to the linked list. 
 
-
+#include<bits/stdc++.h>
+using namespace std;
 
 void Rearrange(Node* head)
 {
@@ -70,10 +71,28 @@ void Rearrange(Node* head)
 
 
 
+Node* reverseList(Node* head)
+{
+    Node *prev = NULL;
+    Node *curr = head;
+    Node *next = NULL;
+
+    while(curr)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+
+
 void rearrange(Node* head)
 {
 
-    // finding the middle point using tortoise and hare
+    // 1) finding the middle point using tortoise and hare
+    // 
 
     Node *slow = head;
     Node *fast = slow->next;
@@ -83,6 +102,87 @@ void rearrange(Node* head)
         fast = fast->next->next;
     }
 
-    // split 
+    // 2) Split the linked list in two halves
+    // head1, head of first half    1 -> 2
+    // head2, head of second half   3 -> 4
 
+    Node *head1 = head;
+    Node *head2 = slow->next;
+    slow->next = NULL;
+
+    // 3) Reverse the second half, i.e.,  4 -> 3
+    
+    head2 = reverseList(head2);
+    
+    // 4) Merge alternate nodes
+    // assigning the dummy nodes
+
+    Node* newH = new Node(0);
+
+
+    while(head1 || head2)
+    {
+
+        // first add the element from list
+
+        if(head1)
+        {
+            newH->next = head1;
+            head1 = head1->next;
+            newH = newH->next;
+
+        }
+
+        // then add the element from the second list
+
+        if(head2)
+        {
+            newH->next = head2;
+            head2 = head2->next;
+            newH = newH->next;
+        }
+    }
+
+    // assign the head od the new list to head pointer
+
+    head = newH->next;
+}
+
+
+// 1. Take two pointers prev and curr, which hold the addresses of head and head-> next. 
+// 2. Compare their data and swap. 
+
+// After that, a new linked list is formed. 
+
+void Rearrange_(Node* head)
+{
+    if( head == NULL)
+    {
+        return;
+    }
+
+    Node *prev = head;
+    Node *curr = head->next;
+
+    while(curr)
+    {
+
+        // swap function for swapping data
+
+        if(prev->data > curr->data)
+        {
+            swap(prev->data, curr->data);
+        }
+
+        if(curr->next && curr->next->data > curr->data)
+        {
+            swap(curr->next->data, curr->data);
+
+        }
+
+        prev = curr->next;
+        if(!curr->next)
+            break;
+        curr = curr->next->next;
+    }
 }
