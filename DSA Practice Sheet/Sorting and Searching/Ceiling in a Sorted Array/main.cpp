@@ -5,24 +5,24 @@ using namespace std;
 // otherwise searching for index such that if x is equal to a[i]then return i  and if x lies between a[i] and a[i+1] including a[i+1] 
 // then return i+1
 
-// int ceilSearch (int a[],int low, int high, int x)
-// {
-//     if(x <= a[low])
-//     return low;
+int ceilSearch (int a[],int low, int high, int x)
+{
+    if(x <= a[low])
+    return low;
 
-//     for(int i=low;i<high;i++)
-//     {
-//         if(a[i] == x)
-//         return i;
-//          
-//          if(a[i] < x && a[i+1] >= x)
-//         return i+1;
-//     }
-
-//     // if x is greater than the element of the array return -1 
+    for(int i=low;i<high;i++)
+    {
+        if(a[i] == x)
+        return i;
     
-//     return -1;
-// }
+        if(a[i] < x && a[i+1] >= x)
+        return i+1;
+    }
+
+    // if x is greater than the element of the array return -1 
+    
+    return -1;
+}
 
 
 

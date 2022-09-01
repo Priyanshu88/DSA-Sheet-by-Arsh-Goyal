@@ -186,3 +186,97 @@ void Rearrange_(Node* head)
         curr = curr->next->next;
     }
 }
+
+
+// Reorder List
+// HardAccuracy: 49.92%Submissions: 37229Points: 8
+// Given a singly linked list: A0→A1→…→An-1→An, reorder it to: A0→An→A1→An-1→A2→An-2→…
+// For example: Given 1->2->3->4->5 its reorder is 1->5->2->4->3.
+
+// Note: It is recommended do this in-place without altering the nodes' values.
+
+// Example 1:
+
+// Input:
+// LinkedList: 1->2->3
+// Output: 1 3 2
+// Example 2:
+
+// Input:
+// LinkedList: 1->7->3->4
+// Output: 1 4 7 3.
+// Your Task:
+// The task is to complete the function reorderList() which should reorder the list as required. The reorder list is automatically printed by the driver's code.
+
+// Note: Try to solve without using any auxilliary space.
+
+// Expected Time Complexity: O(N)
+// Expected Auxiliary Space: O(1)
+
+// Constraints:
+// 1 <= N <= 104
+
+
+void reorderList(Node* head)
+{
+    int r = 0,c;
+    Node *temp,*temp1,*temp2, *p;
+    temp = head;
+
+     // if list contains 2 or lesser nodes, no change needed
+
+    if(head == NULL || head->next == NULL || head->next->next == NULL)
+        return;
+    while(temp != NULL)
+    {
+
+        // finding number of nodes in list
+
+        r++;
+        temp = temp->next;
+
+    }
+
+    // c represents mid point
+
+    c = (r + 1) / 2;
+
+    temp = head;
+    while(c--)
+    {
+        p = temp;
+        temp = temp->next;
+    }
+
+    // dividing the list into 2
+    // temp holds the address to head of second half
+
+    p->next = NULL;
+
+    temp1 = NULL;
+    temp2 = temp;
+
+    // reversing the second half of the list
+    while(temp2!=NULL)
+    {
+        p = temp2->next;
+        temp2->next = temp1;
+        temp1 = temp2;
+        temp2 = p;
+    }
+
+    // second half is now reversed
+
+    p = temp1;
+
+    // merging the 2 halves by selecting nodes
+    // alternatively
+
+    while(r--)
+    {
+        temp = p;
+        p = head->next;
+        head->next = temp;
+        head = head->next;
+    }
+}

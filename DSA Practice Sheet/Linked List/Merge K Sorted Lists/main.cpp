@@ -82,7 +82,7 @@ public:
 
 class Solution {
 public:
-    ListNode* merge2Lists(ListNode* l1, ListNode* l2)
+    ListNode* merge2Lists(ListNode* list1, ListNode* list2)
     {
         if(!list1)
             return list2;
