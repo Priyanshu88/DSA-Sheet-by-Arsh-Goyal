@@ -49,6 +49,8 @@ public:
     MyStack() {
         
     }
+
+    // push element x onto stack
     
     void push(int x) {
         q.push(x);
@@ -58,6 +60,8 @@ public:
             q.pop();
         }
     }
+
+    // removes the element on top of the stack and returns that element
     
     int pop() {
         int item = q.front();
@@ -65,9 +69,13 @@ public:
         return item;
     }
     
+    // get the top element
+
     int top() {
         return q.front();
     }
+
+    // returns whether the stack is empty
     
     bool empty() {
         return q.empty();
@@ -93,6 +101,9 @@ public:
     MyStack() {
         
     }
+
+
+    // push element x onto stack.
     
     void push(int x) {
         q2.push(x);
@@ -101,22 +112,24 @@ public:
             q2.push(q1.front());
             q1.pop();
         }
-        while(!q2.empty())
-        {
-            q1.push(q2.front());
-            q2.pop();
-        }
+        swap(q1, q2);
     }
+
+    // Removes the element on top of the stack and returns that element.
     
     int pop() {
-        int front = q1.front();
-        q1.front();
-        return front;
+        int result = top();
+        q1.pop();
+        return result;
     }
+
+    // Get the top element.
     
     int top() {
         return q1.front();
     }
+
+    // returns whether the stack is empty
     
     bool empty() {
         return q1.empty();
