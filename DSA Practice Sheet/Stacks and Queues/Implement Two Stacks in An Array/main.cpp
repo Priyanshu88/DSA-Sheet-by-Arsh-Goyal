@@ -41,10 +41,188 @@ class twoStacks {
         top2 = n / 2;
     }
 
+     // Method to push an element x to stack1
+
+    void push1(int x)
+    {
+
+        // there is atleast one empty
+        // space fot new element
+
+        if(top1 > 0)
+        {
+            top1--;
+            arr[top1] = x;
+
+        }
+        else
+        {
+            cout << "Stack overflow" << "By element:" << x << endl;
+            return;
+        }
+
+    }
+
+    // Method to push an element x to stack2
+
+
+    void push2(int x)
+    {
+
+        // There is at least one empty space for new element
+
+        if(top2 < size-1)
+        {
+            top2++;
+            arr[top2] = x;
+        }
+        else
+
+        {
+            cout << "Stack overflow" << "By element:" << x << endl;
+            return;
+        }
+    }
+
+    // Method to pop an element from first stack
+
+    int pop1()
+    {
+        if(top1<=size/2)
+        {
+            int x = arr[top1];
+            top1++;
+            return x;
+        }
+        else
+        {
+            cout << "Stack overflow";
+            exit(1);
+        }
+    }
+
+    // Method to pop an element from second stack
+
+    int pop2()
+    {
+        if(top2 >size/2+1)
+        {
+            int x = arr[top2];
+            top2--;
+            return x;
+        }
+        else
+        {
+            cout << "Stack overflow";
+            exit(1);
+        }
+    }
 
 };
 
+// T.C.:O(1)
+// S.C.:O(n)
 
+
+
+// Method 2 (A space efficient implementation) :
+// This method efficiently utilizes the available space. It doesn’t cause an overflow if there is space available in arr[]. 
+// The idea is to start two stacks from two extreme corners of arr[]. stack1 starts from the leftmost element, the first element in stack1 is pushed at index 0. 
+// The stack2 starts from the rightmost corner, the first element in stack2 is pushed at index (n-1). Both stacks grow (or shrink) in opposite direction. 
+// To check for overflow, all we need to check is for space between top elements of both stacks. This check is highlighted in the below code. 
+
+
+class twoStacks {
+    int *arr;
+    int size;
+    int top1, top2;
+
+    public:
+
+    // constructor
+
+    twoStacks(int n)
+    {
+        size = n;
+        arr = new int[n];
+        top1 = -1;
+        top2 = size;
+    }
+
+    // Method to push an element x to stack1
+
+    void push1(int x)
+    {
+
+        // There is at least one empty space for new element
+
+        if(top1<top2-1)
+        {
+            top1++;
+            arr[top1] = x;
+        }
+        else
+        {
+            cout << "Stack overflow";
+            exit(1);
+        }
+    }
+
+    // Method to push an element x to stack2
+
+    void push2(int x)
+    {
+
+        // There is at least one empty
+        // space for new element
+
+        if(top1<top2-1)
+        {
+            top2--;
+            arr[top2] = x;
+
+        }
+        else
+        {
+            cout << "Stack overflow";
+            exit(1);
+        }
+
+    }
+
+    // Method to pop an element from first stack
+
+    int pop1()
+    {
+        if(top1>=0)
+        {
+            int x = arr[top1];
+            top1--;
+            return x;
+        }
+        else
+        {
+            cout << "Stack overflow";
+            exit(1);
+        }
+    }
+
+    int pop2()
+    {
+        if(top2<size)
+        {
+            int x = arr[top2];
+            top2++;
+            return x;
+        }
+        else
+        {
+            cout << "Stack underflow";
+            exit(1);
+        }
+    }
+
+};
 
 // Implement two stacks in an array
 // EasyAccuracy: 49.76%Submissions: 89105Points: 2
