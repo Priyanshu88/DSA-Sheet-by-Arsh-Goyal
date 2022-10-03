@@ -6,7 +6,6 @@
 
 // Example:
 
- 
 // Input: arr[] = {10, 20, 30, 50, 10, 70, 30} 
 // Output: 70, 30, 20, 10, 10, 10, 10
 // The first element in the output indicates the maximum of minimums of all 
@@ -87,8 +86,6 @@ void printMaxofMin(int arr[], int n)
 // As there is a use of triple nested loop in this approach.
 // Auxiliary Space: O(1) 
 // As no extra data structure has been used to store the values.
-
-
 
 
 // Step 1: 
@@ -276,8 +273,8 @@ void printMaxOfMin(int arr[],int n)
 // Your Task:
 // The task is to complete the function maxOfMin() which takes the array arr[] and its size N as inputs and finds the maximum of minimum of every window size and returns an array containing the result. 
 
-// Expected Time Complxity : O(N)
-// Expected Auxilliary Space : O(N)
+// Expected Time Complexity : O(N)
+// Expected Auxiliary Space : O(N)
 
 // Constraints:
 // 1 <= N <= 105
@@ -292,8 +289,10 @@ class Solution
     
     vector <int> maxOfMin(int arr[], int n)
     {
-    
+        
         // Your code here
+
+        vector<int> ans;
     
     }
 };
