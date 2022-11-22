@@ -18,7 +18,6 @@
 // StockSpanner() Initializes the object of the class.
 // int next(int price) Returns the span of the stock's price given that today's price is price.
 
-
 // Example 1:
 
 // Input
@@ -37,7 +36,6 @@
 // stockSpanner.next(75);  // return 4, because the last 4 prices (including today's price of 75) were less than or equal to today's price.
 // stockSpanner.next(85);  // return 6
 
-
 // Constraints:
 
 // 1 <= price <= 105
@@ -47,29 +45,57 @@
 // Submissions
 // 227.5K
 
-
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-class StockSpanner {
+class StockSpanner
+{
 public:
-
     stack<int> stk;
     vector<int> vec;
     int i = 0;
 
     StockSpanner()
     {
-        
     }
-    
-    int next(int price) 
+
+    int next(int price)
     {
         vec.push_back(price);
         int res;
-        while(!stk.empty() && price >= vec[stk.top()])
+        while (!stk.empty() && price >= vec[stk.top()])
             stk.pop();
         res = stk.empty() ? (i + 1) : (i - stk.top());
+        stk.push(i++);
+        return res;
+    }
+};
+
+class StockSpanner
+{
+public:
+    stack<int> stk;
+    vector<int> vec;
+    int i = 0;
+
+    StockSpanner()
+    {
+    }
+
+    int next(int price)
+    {
+        vec.push_back(price);
+        int res;
+        while (!stk.empty() && price >= vec[stk.top()])
+            stk.pop();
+        if (stk.empty())
+        {
+            res = i + 1;
+        }
+        else
+        {
+            res = i - stk.top();
+        }
         stk.push(i++);
         return res;
     }
@@ -81,24 +107,31 @@ public:
  * int param_1 = obj->next(price);
  */
 
+// Initialize a stack stack. The stack will store elements in the format [price, answer] in a monotonic decreasing manner.
 
+// On each call to next:
 
-class StockSpanner {
+// First set ans = 1 representing the answer.
+// The top of the stack has a format [priceTop, answerTop]. While priceTop <= price, add answerTop to ans and pop from the stack.
+// Push the current [price, ans] onto the stack.
+// Return ans.
+
+class StockSpanner
+{
 public:
     stack<pair<int, int>> st;
 
     StockSpanner()
     {
-        
     }
-    
-    int next(int price) 
+
+    int next(int price)
     {
 
         // stock span of any day is always atleast one
 
         int span = 1;
-        while(!st.empty() && price >= st.top().first)
+        while (!st.empty() && price >= st.top().first)
         {
             span += st.top().second;
             st.pop();
@@ -107,3 +140,76 @@ public:
         return span;
     }
 };
+
+class StockSpanner
+{
+public:
+    stack<pair<int, int>> s;
+    int i = 0;
+
+    int next(int price)
+    {
+        if (s.empty())
+        {
+            s.push({price, i++});
+            return 1;
+        }
+        else
+        {
+
+            // now our stack is not empty so we can eleminate smaller element
+
+            while (!s.empty() && s.top().first <= price)
+            {
+                s.pop();
+            }
+            int ans;
+
+            // if our stack is empty so
+            if (s.empty())
+                ans = i + 1; // case for 105 in [100, 80, 70, 60, 105]
+            else
+            {
+                ans = i - s.top().second;
+            }
+            s.push({price, i++});
+            return ans;
+        }
+    }
+};
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner* obj = new StockSpanner();
+ * int param_1 = obj->next(price);
+ */
+
+class StockSpanner
+{
+public:
+    stack<pair<int, int>> stk;
+    StockSpanner()
+    {
+    }
+
+    int next(int price)
+    {
+        int span = 1;
+        while (!stk.empty() && price >= stk.top().first)
+        {
+            auto x = stk.top();
+            stk.pop();
+            int first = x.first;
+            int second = x.second;
+            span += second;
+        }
+        stk.push({price, span});
+        return span;
+    }
+};
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner* obj = new StockSpanner();
+ * int param_1 = obj->next(price);
+ */
